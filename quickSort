@@ -1,0 +1,46 @@
+import java.util.Arrays;
+import java.util.Random;
+public class quickSort {
+public static void quickSort(int []A,int p,int r){
+	if(p<r) {
+		int q = partition(A,p,r);
+		quickSort(A,p,q-1);
+		quickSort(A,q+1,r);
+	}
+}
+
+public static int partition(int []A,int p,int r){
+	int pivot = A[p];
+	int sp = p+1;
+	int bigger = r;
+	while(sp <= bigger) {
+		if(A[sp]<=pivot)
+			sp++;
+		else {
+			swap(A,sp,bigger);
+			bigger--;
+		}
+	}
+	swap(A,p,bigger);
+	return bigger;
+}
+
+public static void swap(int[]A,int a,int b) {
+	int temp;
+	temp = A[a];
+	A[a] = A[b];
+	A[b] = temp;
+}
+
+
+public static void main(String[]args) {
+	Random r = new Random();
+	int []ran = new int[10];
+	for(int i=0;i<10;i++)
+	{ran[i]=(int)(r.nextInt(10));}
+	System.out.println(Arrays.toString(ran));
+	quickSort(ran,0,ran.length-1);
+	System.out.println(Arrays.toString(ran));
+	
+}
+}
