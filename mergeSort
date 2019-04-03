@@ -1,0 +1,43 @@
+import java.util.Arrays;
+import java.util.Random;
+
+public class mergeSort {
+	public static void mergeSort(int []A) {
+		int []helper = new int[A.length];
+		mergeSort(A,0,A.length-1,helper);
+	}
+	
+	private static void mergeSort(int []A,int p,int r,int []helper) {
+		if(p<r) {
+			int mid = (p+r)/2;
+			mergeSort(A,p,mid,helper);
+			mergeSort(A,mid+1,r,helper);
+			merge(A,p,mid,r,helper);
+		}
+	}
+	
+	private static void merge(int []A,int p,int mid,int r,int []helper) {
+		int x = p;
+		int y = mid+1;
+		int z = 0;
+		while(x<=mid&&y<=r) {
+			if(A[x]<=A[y]) {
+				helper[z++]=A[x++];
+			}else {
+				helper[z++]=A[y++];
+			}
+		}
+		while(x<=mid) {
+			helper[z++]=A[x++];
+		}
+		while(y<=r) {
+			helper[z++]=A[y++];
+		}
+	}
+	
+	public static void main(String []args) {
+		int []ran = {9,2,7,6,3,4,1,8,5,0};
+		mergeSort(ran);
+		System.out.println(Arrays.toString(ran));
+	}
+}
